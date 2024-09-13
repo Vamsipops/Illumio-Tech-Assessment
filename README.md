@@ -1,5 +1,5 @@
 
-# Illumio Tech Assessment - Log Count Generator
+# Illumio Technical Assessment - Log Count Generator
 
 This project provides a script to process and count log data. It computes:
 

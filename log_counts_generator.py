@@ -24,6 +24,9 @@ def count_protocol_occurrences(file_path, protocol_dict):
         for line in file:
             # Split the line into elements
             elements = line.split()
+            if len(elements) < 14:
+                print(f"cannot process the file due to incorrect format: {file_path}")
+                return {}
             # Get protocol name from the dictionary and create a tuple
             key = (elements[5], protocol_dict.get(elements[7], 'Unknown'))
             # Increment the count in the dictionary
@@ -90,6 +93,9 @@ def main():
     
     for log_file in log_files:
         protocol_counts = count_protocol_occurrences(log_file, protocol_dict)
+        if protocol_counts == {}:
+            print(f"cannot process the file due to incorrect format: {log_file}")
+            return 
         tag_counts = count_tags(protocol_counts, lookup_dict)
         output_file = f"output_{os.path.splitext(os.path.basename(log_file))[0]}.csv"
         write_counts_to_csv(output_file, tag_counts, protocol_counts)
