@@ -48,7 +48,7 @@ Count of matches for each port/protocol combination.
 
 1. All lookup data is present in the current working directory as lookup_data.csv.
 2. The log file has protocols represented by numbers, and these are mapped to text using protocol-numbers.csv (also in the current directory).
-3. The log files have a consistent format, and the protocol numbers follow standard mappings as found in protocol-numbers.csv.
+3. __The log files have a consistent format__, and the protocol numbers follow standard mappings as found in protocol-numbers.csv.
 4. The script assumes all log files start with the prefix log and have .txt as the file extension.
 
 ### Usage
@@ -66,6 +66,7 @@ Count of matches for each port/protocol combination.
 2. Navigate to the project directory: cd illumio-tech-assessment
 
 ### Future Enhancements
+- Add exception handling to manage errors such as missing files, incorrect file formats, or parsing issues more gracefully.
 - Add support for different log file naming conventions.
 - Introduce support for multiple log file formats (e.g., .csv, .json).
 - Include unit tests for the counting logic.

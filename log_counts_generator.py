@@ -94,7 +94,7 @@ def main():
     for log_file in log_files:
         protocol_counts = count_protocol_occurrences(log_file, protocol_dict)
         tag_counts = count_tags(protocol_counts, lookup_dict)
-        output_file = f"output_{os.path.basename(log_file)}.csv"
+        output_file = f"output_{os.path.splitext(os.path.basename(log_file))[0]}.csv"
         write_counts_to_csv(output_file, tag_counts, protocol_counts)
         print(f"Output file '{output_file}' created successfully.")
     
