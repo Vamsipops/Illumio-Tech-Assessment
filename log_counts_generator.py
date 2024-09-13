@@ -51,10 +51,6 @@ def count_tags(protocol_counts, lookup_dict):
 
 # Function to write counts to a CSV file
 def write_counts_to_csv(output_file, tag_counts, protocol_counts):
-    # Create a list of dictionaries for tag counts
-    tag_counts_list = [{'Tag': tag, 'Count': count} for tag, count in tag_counts.items()]
-    # Create a list of dictionaries for protocol counts
-    protocol_counts_list = [{'dstport': key[0], 'protocol': key[1], 'count': count} for key, count in protocol_counts.items()]
     # Define the headers for the CSV file
     tag_headers = ['Tag', 'Count']
     protocol_headers = ['Port', 'Protocol', 'Count']
@@ -65,8 +61,8 @@ def write_counts_to_csv(output_file, tag_counts, protocol_counts):
         # Write the tag headers
         file.write(','.join(tag_headers) + '\n')
         # Write the tag counts
-        for row in tag_counts_list:
-            file.write(f"{row['Tag']},{row['Count']}\n")
+        for tag, count in tag_counts.items():
+            file.write(f"{tag},{count}\n")
         
         # Add a newline between the sections
         file.write('\n')
@@ -76,8 +72,8 @@ def write_counts_to_csv(output_file, tag_counts, protocol_counts):
         # Write the protocol headers
         file.write(','.join(protocol_headers) + '\n')
         # Write the protocol counts
-        for row in protocol_counts_list:
-            file.write(f"{row['dstport']},{row['protocol']},{row['count']}\n")
+        for (dstport, protocol), count in protocol_counts.items():
+            file.write(f"{dstport},{protocol},{count}\n")
 
 # Main function to orchestrate the process
 def main():
@@ -90,6 +86,7 @@ def main():
     if not log_files:
         print("No log files found to process.")
         return
+    
     
     for log_file in log_files:
         protocol_counts = count_protocol_occurrences(log_file, protocol_dict)
